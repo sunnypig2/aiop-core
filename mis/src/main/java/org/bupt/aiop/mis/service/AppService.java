@@ -163,4 +163,13 @@ public class AppService extends BaseService<App> {
 	public Integer updateAbilityUnderApp(AppAbility appAbility) {
 		return appAbilityMapper.updateByPrimaryKey(appAbility);
 	}
+
+	public List<App> getApps(Integer pageNow, Integer pageSize, Integer developer_id){
+		Example example = new Example(App.class);
+		Example.Criteria criteria = example.createCriteria();
+
+		criteria.andEqualTo("developer_id", developer_id);
+		PageHelper.startPage(pageNow, pageSize);
+		return this.getMapper().selectByExample(example);
+	}
 }
