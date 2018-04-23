@@ -68,7 +68,7 @@ public class DeveloperController {
 		Integer pageNow = (Integer) params.get("pageNow");
 		Integer pageSize = (Integer) params.get("pageSize");
 
-		String name = (String) params.get("name");
+		String name = (String) params.get("username");
 		String email = (String) params.get("email");
 		String mobile = (String) params.get("mobile");
 
@@ -111,6 +111,7 @@ public class DeveloperController {
 		String name = (String) params.get("name");
 		String status = (String) params.get("status");
 		Date updateDate = TimeUtil.parseDate((String) params.get("updateDate"));
+		System.out.println(updateDate);
 		String id = (String) params.get("developerId");
 		Integer developerId = Integer.valueOf(id);
 

@@ -17,6 +17,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -86,7 +87,11 @@ public class AppService extends BaseService<App> {
 		criteria.andEqualTo("developerId", developerId);
 		if (!Validator.checkEmpty(name)) criteria.andLike("name", "%" + name + "%");
 		if (!Validator.checkEmpty(status)) criteria.andEqualTo("status", status);
-		if (!Validator.checkNull(updateDate)) criteria.andEqualTo("updateDate", updateDate);
+		if (!Validator.checkNull(updateDate)) {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			String date = format.format(updateDate);
+			criteria.andEqualTo("updateDate", date);
+		}
 
   		PageHelper.startPage(pageNow, pageSize);
 		return this.getMapper().selectByExample(example);
